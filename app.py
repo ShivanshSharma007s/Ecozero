@@ -5,7 +5,7 @@ from collections import OrderedDict
 app = Flask(__name__)
 
 # Configure Gemini API
-genai.configure(api_key='AIzaSyDFfv14macmMsjXT9CZHOtwWM2A8v5arhg')
+genai.configure(api_key='(Private)'
 model = genai.GenerativeModel('gemini-1.5-flash')
 
 def calculate_carbon_emissions(data):
