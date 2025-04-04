@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>ECO-ZERO</title>
+    <link rel="stylesheet" href="/static/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@800&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            background-image: url('/static/background.jpg');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            background-repeat: no-repeat;
+        }
+        .container {
+            background-color: rgba(255, 255, 255, 0.9); /* Semi-transparent white */
+            backdrop-filter: blur(2px); /* Optional subtle blur effect */
+        }
+        .header-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+        
+        .logo-container {
+            text-align: center;
+            margin-bottom: 10px;
+        }
+        
+        .logo-container img {
+            height: 100px;  /* Reduced from 60px */
+            width: auto;
+            max-width: 100%;
+        }
+        
+        h1 {
+            margin-top: 10px;
+            font-family: 'Playfair Display', serif;
+            font-size: 2.8rem;  /* Slightly reduced from 3.2rem */
+            font-weight: 700;
+            color: #114f11;
+            text-align: center;
+            letter-spacing: -0.5px;
+            line-height: 1.1;
+            position: relative;
+            padding: 15px 0;
+            margin-bottom: 5px;
+            text-shadow: 1px 1px 1px rgba(0,0,0,0.1);
+        }
+        
+        /* Optional: Add a subtle divider below the header */
+        .header-divider {
+            width: 80%;
+            height: 2px;
+            background: linear-gradient(90deg, rgba(46,204,113,0.2), rgba(52,152,219,0.2));
+            margin: 0 auto 30px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header-container">
+            <div class="logo-container">
+                <img src="/static/logo.jpeg" alt="Carbon Calculator Logo">
+            </div>
+            <h1>ECO-ZERO: NET ZERO SOLUTION FOR BUILDINGS</h1>
+        </div>
+        <form method="POST">
+            <div class="form-section">
+                <h2>Basic Information</h2>
+                
+                <div class="form-group">
+                    <label for="flat_name">Flat/Building Name:</label>
+                    <input type="text" id="flat_name" name="flat_name">
+                </div>
+                
+                <div class="form-group">
+                    <label for="accommodation_type">Type of Accommodation:</label>
+                    <select id="accommodation_type" name="accommodation_type" required>
+                        <option value="Flat (Standalone)">Flat (Standalone)</option>
+                        <option value="Apartment">Apartment</option>
+                        <option value="House">House</option>
+                        <option value="Villa">Villa</option>
+                        <option value="Other">Other</option>
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <label for="address">Full Address with Pin Code:</label>
+                    <input type="text" id="address" name="address" required>
+                </div>
+                
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="floors">Number of Floors:</label>
+                        <input type="number" id="floors" name="floors" min="1" value="1" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="floor">Your Floor (0 for House):</label>
+                        <input type="number" id="floor" name="floor" min="0" value="0" required>
+                    </div>
+                </div>
+                
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="occupants">No. of Occupants:</label>
+                        <input type="number" id="occupants" name="occupants" min="1" value="1" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="area">Area (Sq. m.):</label>
+                        <input type="number" id="area" name="area" step="0.1" min="0" required>
+                    </div>
+                </div>
+                
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="category">Category (BHK):</label>
+                        <select id="category" name="category" required>
+                            <option value="1BHK">1BHK</option>
+                            <option value="2BHK">2BHK</option>
+                            <option value="3BHK">3BHK</option>
+                            <option value="4BHK+">4BHK+</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="climate_zone">Climate Zone:</label>
+                        <select id="climate_zone" name="climate_zone" required>
+                            <option value="Hot & Dry">Hot & Dry</option>
+                            <option value="Warm & Humid">Warm & Humid</option>
+                            <option value="Temperate">Temperate</option>
+                            <option value="Cold">Cold</option>
+                            <option value="Composite">Composite</option>
+                        </select>
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="orientation">Which Direction does your Building Face?</label>
+                    <select id="orientation" name="orientation" required>
+                        <option value="North">North</option>
+                        <option value="South">South</option>
+                        <option value="East">East</option>
+                        <option value="West">West</option>
+                        <option value="North-East">North-East</option>
+                        <option value="North-West">North-West</option>
+                        <option value="South-East">South-East</option>
+                        <option value="South-West">South-West</option>
+                    </select>
+                </div>
+            </div>
+            
+            <div class="form-section">
+                <h2>Energy Consumption</h2>
+                
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="electricity_units">Total Billed Units Last Year (kWh):</label>
+                        <input type="number" id="electricity_units" name="electricity_units" step="0.1" min="0" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="electricity_bill">Total Electricity Bill Last Year:</label>
+                        <input type="number" id="electricity_bill" name="electricity_bill" step="0.1" min="0">
+                    </div>
+                </div>
+            </div>
+            
+            <div class="form-section">
+                <h2>Building Systems</h2>
+                
+                <div class="form-group">
+                    <label for="hvac_system">Primary HVAC System:</label>
+                    <select id="hvac_system" name="hvac_system" required>
+                        <option value="Fan">Fan</option>
+                        <option value="Split AC">Split AC</option>
+                        <option value="Window AC">Window AC</option>
+                        <option value="VRF">VRF</option>
+                        <option value="Chiller">Chiller</option>
+                        <option value="None">None</option>
+                    </select>
+                </div>
+                
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="hvac_star_rating">HVAC Star Rating:</label>
+                        <select id="hvac_star_rating" name="hvac_star_rating" required>
+                            <option value="1">1 Star</option>
+                            <option value="2">2 Star</option>
+                            <option value="3">3 Star</option>
+                            <option value="4">4 Star</option>
+                            <option value="5">5 Star</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="thermal_setpoint">Thermal Comfort Set Point (°C):</label>
+                        <input type="number" id="thermal_setpoint" name="thermal_setpoint" step="0.1" value="24">
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="hvac_tonnage">Total Tonnage Rating (TR):</label>
+                    <input type="number" id="hvac_tonnage" name="hvac_tonnage" step="0.1" min="0" value="0">
+                </div>
+                
+                <div class="form-group">
+                    <label>Appliances Used:</label>
+                    <div class="checkbox-grid">
+                        <div><input type="checkbox" id="ac" name="appliances" value="Air Conditioner"><label for="ac">Air Conditioner</label></div>
+                        <div><input type="checkbox" id="computer" name="appliances" value="Computer"><label for="computer">Computer</label></div>
+                        <div><input type="checkbox" id="led" name="appliances" value="LED"><label for="led">LED</label></div>
+                        <div><input type="checkbox" id="cfl" name="appliances" value="CFL"><label for="cfl">CFL</label></div>
+                        <div><input type="checkbox" id="microwave" name="appliances" value="Microwave"><label for="microwave">Microwave</label></div>
+                        <div><input type="checkbox" id="washing" name="appliances" value="Washing Machine"><label for="washing">Washing Machine</label></div>
+                        <div><input type="checkbox" id="fan" name="appliances" value="Ceiling Fan"><label for="fan">Ceiling Fan</label></div>
+                        <div><input type="checkbox" id="fridge" name="appliances" value="Refrigerator"><label for="fridge">Refrigerator</label></div>
+                        <div><input type="checkbox" id="airfryer" name="appliances" value="Air Fryer"><label for="airfryer">Air Fryer</label></div>
+                        <div><input type="checkbox" id="chimney" name="appliances" value="Chimney"><label for="chimney">Chimney</label></div>
+                        <div><input type="checkbox" id="geyser" name="appliances" value="Geyser"><label for="geyser">Geyser</label></div>
+                        <div><input type="checkbox" id="otg" name="appliances" value="OTG"><label for="otg">OTG</label></div>
+                        <div><input type="checkbox" id="oven" name="appliances" value="Oven"><label for="oven">Oven</label></div>
+                        <div><input type="checkbox" id="stove" name="appliances" value="Electric Stove"><label for="stove">Electric Stove</label></div>
+                        <div><input type="checkbox" id="bev" name="appliances" value="BEV Charger"><label for="bev">BEV Charger</label></div>
+                        <div><input type="checkbox" id="tv" name="appliances" value="Television"><label for="tv">Television</label></div>
+                        <div><input type="checkbox" id="heater" name="appliances" value="Room Heater"><label for="heater">Room Heater</label></div>
+                        <div><input type="checkbox" id="kettle" name="appliances" value="Electric Kettle"><label for="kettle">Electric Kettle</label></div>
+                        <div><input type="checkbox" id="other" name="appliances" value="Other"><label for="other">Other</label></div>
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="other_appliances">Other Appliances (comma separated):</label>
+                    <input type="text" id="other_appliances" name="other_appliances" placeholder="e.g., Dishwasher, Coffee Maker">
+                </div>
+            </div>
+            
+            <div class="form-section">
+                <h2>Building Envelope</h2>
+                
+                <div class="sub-section">
+                    <h3>Wall Details</h3>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="wall_area">Wall Area (Sq. m):</label>
+                            <input type="number" id="wall_area" name="wall_area" step="0.1" min="0" value="0">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="wall_assembly">Wall Assembly:</label>
+                            <select id="wall_assembly" name="wall_assembly">
+                                <option value="Red Brick Construction">Red Brick Construction</option>
+                                <option value="Concrete Block">Concrete Block</option>
+                                <option value="Insulated Wall">Insulated Wall</option>
+                                <option value="Other">Other</option>
+                            </select>
+                        </div>
+                    </div>
+                    
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="wall_insulation">Insulation:</label>
+                            <select id="wall_insulation" name="wall_insulation">
+                                <option value="None">None</option>
+                                <option value="EPS">EPS</option>
+                                <option value="XPS">XPS</option>
+                                <option value="Mineral Wool">Mineral Wool</option>
+                                <option value="Other">Other</option>
+                            </select>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="wall_tiles">Tiles:</label>
+                            <select id="wall_tiles" name="wall_tiles">
+                                <option value="None">None</option>
+                                <option value="Ceramic">Ceramic</option>
+                                <option value="Porcelain">Porcelain</option>
+                                <option value="Other">Other</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="sub-section">
+                    <h3>Roof Details</h3>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="roof_area">Roof Area (Sq. m):</label>
+                            <input type="number" id="roof_area" name="roof_area" step="0.1" min="0" value="0">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="roof_assembly">Roof Assembly:</label>
+                            <select id="roof_assembly" name="roof_assembly">
+                                <option value="Reinforced Brick Concrete (RBC)">Reinforced Brick Concrete (RBC)</option>
+                                <option value="Concrete Slab">Concrete Slab</option>
+                                <option value="Insulated Roof">Insulated Roof</option>
+                                <option value="Other">Other</option>
+                            </select>
+                        </div>
+                    </div>
+                    
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="roof_insulation">Insulation:</label>
+                            <select id="roof_insulation" name="roof_insulation">
+                                <option value="None">None</option>
+                                <option value="EPS">EPS</option>
+                                <option value="XPS">XPS</option>
+                                <option value="Polyurethane">Polyurethane</option>
+                                <option value="Other">Other</option>
+                            </select>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="roof_tiles">Tiles:</label>
+                            <select id="roof_tiles" name="roof_tiles">
+                                <option value="None">None</option>
+                                <option value="Clay">Clay</option>
+                                <option value="Concrete">Concrete</option>
+                                <option value="Metal">Metal</option>
+                                <option value="Other">Other</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="sub-section">
+                    <h3>Floor Details</h3>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="floor_area">Floor Area (Sq. m):</label>
+                            <input type="number" id="floor_area" name="floor_area" step="0.1" min="0" value="0">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="floor_assembly">Floor Assembly:</label>
+                            <select id="floor_assembly" name="floor_assembly">
+                                <option value="Granite">Granite</option>
+                                <option value="Marble">Marble</option>
+                                <option value="Vitrified Tiles">Vitrified Tiles</option>
+                                <option value="Wooden">Wooden</option>
+                                <option value="Other">Other</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="sub-section">
+                    <h3>Window Details</h3>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="window_area">Window Area (Sq. m):</label>
+                            <input type="number" id="window_area" name="window_area" step="0.1" min="0" value="0">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="window_glass">Window Glass Type:</label>
+                            <select id="window_glass" name="window_glass">
+                                <option value="Single Glazed Unit (SGU)">Single Glazed Unit (SGU)</option>
+                                <option value="Double Glazed Unit (DGU)">Double Glazed Unit (DGU)</option>
+                                <option value="Low-E Glass">Low-E Glass</option>
+                                <option value="Other">Other</option>
+                            </select>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="window_frame">Window Frame Type:</label>
+                        <select id="window_frame" name="window_frame">
+                            <option value="Aluminium">Aluminium</option>
+                            <option value="Wooden">Wooden</option>
+                            <option value="UPVC">UPVC</option>
+                            <option value="Other">Other</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            
+            <button type="submit">Submit</button>
+        </form>
+    </div>
+</body>
+</html>
